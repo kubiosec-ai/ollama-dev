@@ -22,7 +22,7 @@ client = ollama.Client(host='http://127.0.0.1:8080')
 # Initialize conversation with a user query
 messages = [{'role': 'user', 'content': 'What is the flight time from New York (NYC) to Los Angeles (LAX)?'}]
 
-# First API call: Send the query and function description to the model
+  # First API call: Send the query and function description to the model
 response =  client.chat(
     model='llama3.1',
     messages=messages,
@@ -51,7 +51,7 @@ response =  client.chat(
     ],
   )
 
-# Add the model's response to the conversation history
+  # Add the model's response to the conversation history
 messages.append(response['message'])
 
 # Check if the model decided to use the provided function
@@ -59,7 +59,7 @@ if not response['message'].get('tool_calls'):
     print("The model didn't use the function. Its response was:")
     print(response['message']['content'])
 
-  # Process function calls made by the model
+# Process function calls made by the model
 if response['message'].get('tool_calls'):
     available_functions = {
       'get_flight_times': get_flight_times,
@@ -79,6 +79,4 @@ if response['message'].get('tool_calls'):
 # Second API call: Get final response from the model
 final_response = client.chat(model='llama3.1', messages=messages)
 print(final_response['message']['content'])
-
-
 
